@@ -11,7 +11,6 @@ namespace Exam.Domain.Entities
     public class Lesson
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         [MaxLength(3)]
         [Column(TypeName = "char(3)")]

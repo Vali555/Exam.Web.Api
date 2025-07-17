@@ -6,7 +6,6 @@ namespace Exam.Domain.Entities
     public class Class
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         [Range(1, 99)]
         public int Number { get; set; }

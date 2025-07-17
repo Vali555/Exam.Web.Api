@@ -17,11 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Exam.Application\Exam.Application.csproj" />
     <ProjectReference Include="..\Exam.Domain\Exam.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Persistence\Repositories\" />
   </ItemGroup>
 
 </Project>

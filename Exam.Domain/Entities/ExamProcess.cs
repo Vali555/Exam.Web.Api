@@ -11,7 +11,6 @@ namespace Exam.Domain.Entities
     public class ExamProcess
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public Guid LessonId { get; set; }
         public Guid StudentId { get; set; }
