@@ -39,12 +39,18 @@ namespace Exam.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<ExamProcess>> GetAllAsync()
         {
-            return await _context.ExamProcesses.ToListAsync();
+            return await _context.ExamProcesses
+                .Include(e => e.Lesson)
+                .Include(e => e.Student)
+                .ToListAsync();
         }
 
         public async Task<ExamProcess?> GetByIdAsync(Guid id)
         {
-            return await _context.ExamProcesses.FindAsync(id);
+            return await _context.ExamProcesses
+                         .Include(e => e.Lesson)
+                         .Include(e => e.Student)
+                         .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task<ListResult<ExamProcess>> GetPaginationAsync(int offset, int limit)
@@ -52,6 +58,8 @@ namespace Exam.Infrastructure.Persistence.Repositories
             var totalCount = await _context.ExamProcesses.CountAsync();
 
             var items = await _context.ExamProcesses
+                .Include(e => e.Lesson)
+                .Include(e => e.Student)
                 .OrderBy(s => s.Id)
                 .Skip(offset)
                 .Take(limit)

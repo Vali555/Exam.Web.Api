@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Exam.Application.Services
 {
@@ -23,7 +24,7 @@ namespace Exam.Application.Services
             _examProcessRepository = examProcessRepository;
             _mapper = mapper;
         }
-        public async Task<Guid> AddAsync(ExamProcessDto item)
+        public async Task<Guid> AddAsync(ExamProcessRequestDto item)
         {
             item.Id = Guid.NewGuid();
             var examProcess = _mapper.Map<ExamProcess>(item);
@@ -59,22 +60,28 @@ namespace Exam.Application.Services
             }
         }
 
-        public async Task<IEnumerable<ExamProcess>> GetAllAsync()
+        public async Task<IEnumerable<ExamProcessResponseDto>> GetAllAsync()
         {
-            return await _examProcessRepository.GetAllAsync();
+            var data= await _examProcessRepository.GetAllAsync();
+            var responseData=_mapper.Map<IEnumerable<ExamProcessResponseDto>>(data);
+            return responseData;
         }
 
-        public async Task<ExamProcess?> GetByIdAsync(Guid id)
+        public async Task<ExamProcessResponseDto?> GetByIdAsync(Guid id)
         {
-            return await _examProcessRepository.GetByIdAsync(id);
+            var data= await _examProcessRepository.GetByIdAsync(id);
+            var responseData = _mapper.Map<ExamProcessResponseDto>(data);
+            return responseData;
         }
 
-        public async Task<ListResult<ExamProcess>> GetPaginationAsync(int offset, int limit)
+        public async Task<ListResult<ExamProcessResponseDto>> GetPaginationAsync(int offset, int limit)
         {
-            return await _examProcessRepository.GetPaginationAsync(offset, limit);
+            var data= await _examProcessRepository.GetPaginationAsync(offset, limit);
+            var responseData = _mapper.Map<ListResult<ExamProcessResponseDto>>(data);
+            return responseData;
         }
 
-        public async Task<Guid> UpdateAsync(ExamProcessDto item)
+        public async Task<Guid> UpdateAsync(ExamProcessRequestDto item)
         {
             var examProcess = _mapper.Map<ExamProcess>(item);
             try

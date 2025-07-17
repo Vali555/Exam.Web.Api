@@ -40,12 +40,12 @@ namespace Exam.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Student>> GetAllAsync()
         {
-           return await _context.Students.ToListAsync();
+           return await _context.Students.Include(s => s.Class).ToListAsync();
         }
 
         public async Task<Student?> GetByIdAsync(Guid id)
         {
-           return await _context.Students.FindAsync(id);
+            return await _context.Students.Include(s => s.Class).FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<ListResult<Student>> GetPaginationAsync(int offset, int limit)
@@ -53,6 +53,7 @@ namespace Exam.Infrastructure.Persistence.Repositories
             var totalCount = await _context.Students.CountAsync();
 
             var items = await _context.Students
+                .Include(s => s.Class)
                 .OrderBy(s => s.Id)
                 .Skip(offset)
                 .Take(limit)

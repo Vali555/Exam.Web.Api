@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Exam.Application.Services
 {
@@ -23,7 +24,7 @@ namespace Exam.Application.Services
             _classRepository = classRepository;
             _mapper = mapper;
         }
-        public async Task<Guid> AddAsync(ClassDto item)
+        public async Task<Guid> AddAsync(ClassrequestDto item)
         {
             item.Id = Guid.NewGuid();
             var classItem = _mapper.Map<Class>(item);
@@ -59,22 +60,28 @@ namespace Exam.Application.Services
             }
         }
 
-        public async Task<IEnumerable<Class>> GetAllAsync()
+        public async Task<IEnumerable<ClassResponseDto>> GetAllAsync()
         {
-            return await _classRepository.GetAllAsync();
+            var data = await _classRepository.GetAllAsync();
+            var responseData = _mapper.Map<IEnumerable<ClassResponseDto>>(data);
+            return responseData;
         }
 
-        public async Task<Class?> GetByIdAsync(Guid id)
+        public async Task<ClassResponseDto?> GetByIdAsync(Guid id)
         {
-            return await _classRepository.GetByIdAsync(id);
+            var data= await _classRepository.GetByIdAsync(id);
+            var responseData = _mapper.Map<ClassResponseDto>(data);
+            return responseData;
         }
 
-        public async Task<ListResult<Class>> GetPaginationAsync(int offset, int limit)
+        public async Task<ListResult<ClassResponseDto>> GetPaginationAsync(int offset, int limit)
         {
-            return await _classRepository.GetPaginationAsync(offset, limit);
+            var data= await _classRepository.GetPaginationAsync(offset, limit);
+            var responseData = _mapper.Map<ListResult<ClassResponseDto>>(data);
+            return responseData;
         }
 
-        public async Task<Guid> UpdateAsync(ClassDto item)
+        public async Task<Guid> UpdateAsync(ClassrequestDto item)
         {
             var classItem = _mapper.Map<Class>(item);
             try

@@ -39,7 +39,10 @@ namespace Exam.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Lesson>> GetAllAsync()
         {
-            return await _context.Lessons.ToListAsync();
+            return await _context.Lessons
+                .Include(l => l.Class)
+                .Include(l => l.Teacher)
+                .ToListAsync();
         }
 
         public async Task<Lesson?> GetByIdAsync(Guid id)
@@ -56,6 +59,8 @@ namespace Exam.Infrastructure.Persistence.Repositories
 
             var items = await _context.Lessons
                 .OrderBy(s => s.Id)
+                .Include(l => l.Class)
+                .Include(l => l.Teacher)
                 .Skip(offset)
                 .Take(limit)
                 .ToListAsync();

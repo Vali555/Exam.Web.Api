@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Exam.Common.DTOs
 {
-    public class ClassDto
+    public class StudentRequestDto
     {
-        public Guid Id { get; set; }= Guid.NewGuid();
-  
+        public Guid Id { get; set; }
         public int Number { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public Guid ClassId { get; set; }
     }
 }

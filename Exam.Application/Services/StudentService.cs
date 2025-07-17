@@ -23,7 +23,7 @@ namespace Exam.Application.Services
             _studentRepository = studentRepository;
             _mapper = mapper;
         }
-        public async Task<Guid> AddAsync(StudentDto item)
+        public async Task<Guid> AddAsync(StudentRequestDto item)
         {
             item.Id = Guid.NewGuid();
             var student=_mapper.Map<Student>(item);
@@ -59,22 +59,29 @@ namespace Exam.Application.Services
             }
         }
 
-        public async Task<IEnumerable<Student>> GetAllAsync()
+        public async Task<IEnumerable<StudentResponseDto>> GetAllAsync()
         {
-            return await _studentRepository.GetAllAsync();
+            var data= await _studentRepository.GetAllAsync();
+            var responseData = _mapper.Map<IEnumerable<StudentResponseDto>>(data);
+            return responseData;
         }
 
-        public async Task<Student?> GetByIdAsync(Guid id)
+        public async Task<StudentResponseDto?> GetByIdAsync(Guid id)
         {
-            return await _studentRepository.GetByIdAsync(id);
+            var data= await _studentRepository.GetByIdAsync(id);
+            var responseData=_mapper.Map<StudentResponseDto>(data);
+            return responseData;
         }
 
-        public async Task<ListResult<Student>> GetPaginationAsync(int offset, int limit)
+        public async Task<ListResult<StudentResponseDto>> GetPaginationAsync(int offset, int limit)
         {
-            return await _studentRepository.GetPaginationAsync(offset, limit);
+            var data= await _studentRepository.GetPaginationAsync(offset, limit);
+            var responseData = _mapper.Map<ListResult<StudentResponseDto>>(data);
+            return responseData;
+
         }
 
-        public async Task<Guid> UpdateAsync(StudentDto item)
+        public async Task<Guid> UpdateAsync(StudentRequestDto item)
         {
             var student = _mapper.Map<Student>(item);
             try

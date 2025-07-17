@@ -3,7 +3,7 @@
 
 namespace Exam.Common.DTOs
 {
-    public class ExamProcessDto
+    public class ExamProcessRequestDto
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public Guid LessonId { get; set; }
