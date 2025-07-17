@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Exam.Domain\Exam.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\Repositories\" />
+  </ItemGroup>
+
 </Project>
