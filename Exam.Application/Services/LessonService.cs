@@ -59,9 +59,11 @@ namespace Exam.Application.Services
             }
         }
 
-        public async Task<IEnumerable<Lesson>> GetAllAsync()
+        public async Task<IEnumerable<LessonResponseDto>> GetAllAsync()
         {
-            return await _lessonRepository.GetAllAsync();
+            var data= await _lessonRepository.GetAllAsync();
+            var responseData = _mapper.Map<IEnumerable<LessonResponseDto>>(data);
+            return responseData;
         }
 
         public async Task<LessonResponseDto?> GetByIdAsync(Guid id)
@@ -71,9 +73,11 @@ namespace Exam.Application.Services
             return responseData;
         }
 
-        public async Task<ListResult<Lesson>> GetPaginationAsync(int offset, int limit)
+        public async Task<ListResult<LessonResponseDto>> GetPaginationAsync(int offset, int limit)
         {
-            return await _lessonRepository.GetPaginationAsync(offset, limit);
+            var data= await _lessonRepository.GetPaginationAsync(offset, limit);
+            var responseData=_mapper.Map<ListResult<LessonResponseDto>>(data);
+            return responseData;
         }
 
         public async Task<Guid> UpdateAsync(LessonRequestDto item)

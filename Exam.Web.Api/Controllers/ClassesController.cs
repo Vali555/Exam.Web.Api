@@ -36,13 +36,13 @@ namespace Exam.Web.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] ClassDto item)
+        public async Task<IActionResult> Add([FromBody] ClassrequestDto item)
         {
             return Ok(await _classService.AddAsync(item));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] ClassDto item)
+        public async Task<IActionResult> Update([FromBody] ClassrequestDto item)
         {
             return Ok(await _classService.UpdateAsync(item));
         }

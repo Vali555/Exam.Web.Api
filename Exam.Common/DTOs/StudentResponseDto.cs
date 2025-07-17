@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace Exam.Common.DTOs
 {
-    public class LessonResponseDto
+    public class StudentResponseDto
     {
         public Guid Id { get; set; }
-        public string LessonCode { get; set; }
-        public string LessonName { get; set; }
+        public int Number { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public Guid ClassId { get; set; }
         public int ClassNumber { get; set; }
-        public Guid TeacherId { get; set; }
-
-        public string TeacherName { get; set; }
-        public string TeacherSurname { get; set; }
     }
 }

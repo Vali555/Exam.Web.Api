@@ -11,11 +11,11 @@ namespace Exam.Application.Services.Interfaces
 {
     public interface IClassService
     {
-        Task<Class?> GetByIdAsync(Guid id);
-        Task<ListResult<Class>> GetPaginationAsync(int offset, int limit);
-        Task<IEnumerable<Class>> GetAllAsync();
-        Task<Guid> AddAsync(ClassDto item);
-        Task<Guid> UpdateAsync(ClassDto item);
+        Task<ClassResponseDto?> GetByIdAsync(Guid id);
+        Task<ListResult<ClassResponseDto>> GetPaginationAsync(int offset, int limit);
+        Task<IEnumerable<ClassResponseDto>> GetAllAsync();
+        Task<Guid> AddAsync(ClassrequestDto item);
+        Task<Guid> UpdateAsync(ClassrequestDto item);
         Task<bool> DeleteAsync(Guid Id);
     }
 }
