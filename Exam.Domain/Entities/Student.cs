@@ -11,7 +11,6 @@ namespace Exam.Domain.Entities
     public class Student
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         [Range(1, 99999)]
         public int Number { get; set; }
